@@ -1,28 +1,27 @@
 import http from 'http';
 import fs from 'fs';
+import route from './routes.js';
 
 fs.writeFile('./msg.txt', 'Hello', 'utf-8', (error) => {
   if (error) {
-    console.log('Fail', error);
+    console.log('failed to write file', error);
     return;
   }
-  console.log('Done');
+  console.log('file created successfully');
 });
 
 fs.readFile('./msg.txt', 'utf-8', (error, content) => {
   if (error) {
-    console.log('Fail', error);
+    console.log('failed to read file', error);
     return;
   }
-  console.log(`Content: ${content}`);
+  console.log(`content: ${content}`);
   bootstrap(content);
 });
 
-function bootstrap(msg) {
+function bootstrap(content) {
   const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-type', 'text/plain; charset=utf-8');
-    res.end(msg);
+    route(req, res, { content });
   });
 
   const host = 'localhost';
