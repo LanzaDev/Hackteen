@@ -1,0 +1,29 @@
+### Test GET /
+GET http://localhost:3000/
+Accept: application/json
+
+### Test PUT /files
+PUT http://localhost:3000/files
+Content-Type: application/json
+
+{
+  "name": "test",
+  "content": "File contents test.txt"
+}
+
+### Test PATCH /files
+PATCH http://localhost:3000/files
+Content-Type: application/json
+
+{
+  "name": "test",
+  "content": "Appended content via PATCH"
+}
+
+### Test DELETE /files
+DELETE http://localhost:3000/files
+Content-Type: application/json
+
+{
+  "name": "test"
+}

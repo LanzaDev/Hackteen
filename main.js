@@ -2,7 +2,7 @@ import http from 'http';
 import fs from 'fs';
 import route from './routes.js';
 
-fs.writeFile('./msg.txt', 'Hello', 'utf-8', (error) => {
+fs.writeFile('./message.txt', 'Hello', 'utf-8', (error) => {
   if (error) {
     console.log('failed to write file', error);
     return;
@@ -10,7 +10,7 @@ fs.writeFile('./msg.txt', 'Hello', 'utf-8', (error) => {
   console.log('file created successfully');
 });
 
-fs.readFile('./msg.txt', 'utf-8', (error, content) => {
+fs.readFile('./message.txt', 'utf-8', (error, content) => {
   if (error) {
     console.log('failed to read file', error);
     return;
@@ -24,10 +24,10 @@ function bootstrap(content) {
     route(req, res, { content });
   });
 
-  const host = 'localhost';
   const port = 3000;
+  const host = 'localhost';
 
   server.listen(port, host, () => {
-    console.log(`API rodando em http://${host}:${port}/`);
+    console.log(`API running on http://${host}:${port}/`)
   });
 }
