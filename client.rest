@@ -1,29 +1,29 @@
 ### Test GET /
 GET http://localhost:3000/
-Accept: application/json
 
-### Test PUT /files
-PUT http://localhost:3000/files
+### Test GET /products
+GET http://localhost:3000/products
+
+### Test GET /products/id
+GET http://localhost:3000/products/
+
+### Test POST /products
+POST http://localhost:3000/products
 Content-Type: application/json
 
 {
   "name": "test",
-  "content": "File contents test.txt"
+  "price": "10"
 }
 
-### Test PATCH /files
-PATCH http://localhost:3000/files
+### Test PATCH /products/id
+PATCH http://localhost:3000/products/
 Content-Type: application/json
 
 {
   "name": "test",
-  "content": "Appended content via PATCH"
+  "price": "4"
 }
 
-### Test DELETE /files
-DELETE http://localhost:3000/files
-Content-Type: application/json
-
-{
-  "name": "test"
-}
+### Test DELETE /products/id
+DELETE http://localhost:3000/products/
