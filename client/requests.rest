@@ -1,0 +1,14 @@
+### Test GET /requests
+GET http://localhost:3000/requests
+
+### Test GET /requests/id
+GET http://localhost:3000/requests/
+
+### Test POST /requests
+POST http://localhost:3000/requests
+Content-Type: application/json
+
+{
+  "products": [ { "id": 1, "quantity": 2 } ],
+  "total_value": 150.00
+}

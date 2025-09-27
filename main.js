@@ -1,33 +1,33 @@
-import http from 'http';
-import fs from 'fs';
-import route from './routes.js';
+import sqlite3 from 'sqlite3';
+import express from 'express';
+import bodyParser from 'body-parser';
+import { sequelize } from './models.js';  
+import { productsRoutes } from './routes/products.js'
+import { requestsRoutes } from './routes/requests.js'
 
-fs.writeFile('./msg.txt', 'Hello', 'utf-8', (error) => {
-  if (error) {
-    console.log('failed to write file', error);
-    return;
-  }
-  console.log('file created successfully');
-});
+const app = express();
 
-fs.readFile('./msg.txt', 'utf-8', (error, content) => {
-  if (error) {
-    console.log('failed to read file', error);
-    return;
-  }
-  console.log(`content: ${content}`);
-  bootstrap(content);
-});
+app.use(bodyParser.json());
 
-function bootstrap(content) {
-  const server = http.createServer((req, res) => {
-    route(req, res, { content });
+app.use(productsRoutes);
+app.use(requestsRoutes);
+
+async function bootstrap() {
+  const database = new sqlite3.Database('./dev.db', (error) => {
+    if (error) {
+      console.log('failed to connect to database', error);
+      return;
+    }
+    console.log('connected to database');
   });
 
-  const host = 'localhost';
+  await sequelize.sync();
+  
   const port = 3000;
+  const host = 'localhost';
 
-  server.listen(port, host, () => {
-    console.log(`API rodando em http://${host}:${port}/`);
-  });
+  app.listen(port);
+  console.log(`listening on http://${host}:${port}`);
 }
+
+bootstrap();
