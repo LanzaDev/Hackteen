@@ -98,7 +98,7 @@ export const Request = sequelize.define('request', {
   },
   status: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: false
   }
 });
 
@@ -124,7 +124,7 @@ Request.belongsToMany(Product, { through: ProductRequest });
 export async function createRequest(newRequest) {
   try {
     const request = await Request.create({
-      total_value: newRequest.totalValue,
+      total_value: newRequest.total_value,
       status: 'pending'
     });
 
@@ -136,7 +136,7 @@ export async function createRequest(newRequest) {
     }
 
     console.log(`request created successfully`);
-    
+
     return request;
   } catch (error) {
     console.log('failed to create request', error);

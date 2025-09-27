@@ -1,13 +1,16 @@
 import sqlite3 from 'sqlite3';
 import express from 'express';
-import { sequelize } from './models.js';
+import bodyParser from 'body-parser';
+import { sequelize } from './models.js';  
+import { productsRoutes } from './routes/products.js'
+import { requestsRoutes } from './routes/requests.js'
 
 const app = express();
 
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.url}`);
-  next();
-});
+app.use(bodyParser.json());
+
+app.use(productsRoutes);
+app.use(requestsRoutes);
 
 async function bootstrap() {
   const database = new sqlite3.Database('./dev.db', (error) => {

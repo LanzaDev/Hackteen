@@ -1,6 +1,3 @@
-### Test GET /
-GET http://localhost:3000/
-
 ### Test GET /products
 GET http://localhost:3000/products
 
